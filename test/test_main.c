@@ -9,7 +9,11 @@
 
 START_TEST(firstTest)
 {
-   ck_assert_msg(5==5, "Not quite right!");   
+   ck_assert_msg(5==5, "Not quite right!");  
+   char *r_input = "XIV";
+   Roman *r1 = roman_create(r_input);
+   ck_assert_msg(strcmp(r1->r,r_input) == 0, "Still not right!!");
+   int num = roman2int(r1);
 }
 END_TEST
 
@@ -29,7 +33,6 @@ Suite * Roman_suite(void)
 
 int main(int argc, char* argv[])
 {
-//   return 0;
    int number_failed;
    Suite *s;
    SRunner *sr;

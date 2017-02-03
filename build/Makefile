@@ -102,7 +102,8 @@ CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_RomanCheck_OBJECTS = test/RomanCheck-test_main.$(OBJEXT)
+am_RomanCheck_OBJECTS = test/RomanCheck-test_main.$(OBJEXT) \
+	src/RomanCheck-roman.$(OBJEXT)
 RomanCheck_OBJECTS = $(am_RomanCheck_OBJECTS)
 RomanCheck_DEPENDENCIES =
 RomanCheck_LINK = $(CCLD) $(RomanCheck_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
@@ -489,7 +490,7 @@ top_srcdir = ..
 AUTOMAKE_OPTIONS = subdir-objects
 RomanCheck_SOURCES = \
 	test/test_main.c \
-        src/Roman.h
+        src/roman.h src/roman.c
 
 RomanCheck_CFLAGS = 
 RomanCheck_LDADD = -lcheck
@@ -497,7 +498,7 @@ RomanCheck_LDADD = -lcheck
 #bin_PROGRAMS = RomanNumeralCalculator
 #RomanNumeralCalculator_SOURCES = \
 #	test/test_main.c \
-#        src/Roman.h
+#        src/roman.h
 ACLOCAL_AMFLAGS = -I m4
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -563,6 +564,14 @@ test/$(DEPDIR)/$(am__dirstamp):
 	@: > test/$(DEPDIR)/$(am__dirstamp)
 test/RomanCheck-test_main.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+src/$(am__dirstamp):
+	@$(MKDIR_P) src
+	@: > src/$(am__dirstamp)
+src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/$(DEPDIR)
+	@: > src/$(DEPDIR)/$(am__dirstamp)
+src/RomanCheck-roman.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 
 RomanCheck$(EXEEXT): $(RomanCheck_OBJECTS) $(RomanCheck_DEPENDENCIES) $(EXTRA_RomanCheck_DEPENDENCIES) 
 	@rm -f RomanCheck$(EXEEXT)
@@ -570,11 +579,13 @@ RomanCheck$(EXEEXT): $(RomanCheck_OBJECTS) $(RomanCheck_DEPENDENCIES) $(EXTRA_Ro
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f src/*.$(OBJEXT)
 	-rm -f test/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
+include src/$(DEPDIR)/RomanCheck-roman.Po
 include test/$(DEPDIR)/RomanCheck-test_main.Po
 
 .c.o:
@@ -606,6 +617,20 @@ test/RomanCheck-test_main.obj: test/test_main.c
 #	$(AM_V_CC)source='test/test_main.c' object='test/RomanCheck-test_main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(RomanCheck_CFLAGS) $(CFLAGS) -c -o test/RomanCheck-test_main.obj `if test -f 'test/test_main.c'; then $(CYGPATH_W) 'test/test_main.c'; else $(CYGPATH_W) '$(srcdir)/test/test_main.c'; fi`
+
+src/RomanCheck-roman.o: src/roman.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(RomanCheck_CFLAGS) $(CFLAGS) -MT src/RomanCheck-roman.o -MD -MP -MF src/$(DEPDIR)/RomanCheck-roman.Tpo -c -o src/RomanCheck-roman.o `test -f 'src/roman.c' || echo '$(srcdir)/'`src/roman.c
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/RomanCheck-roman.Tpo src/$(DEPDIR)/RomanCheck-roman.Po
+#	$(AM_V_CC)source='src/roman.c' object='src/RomanCheck-roman.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(RomanCheck_CFLAGS) $(CFLAGS) -c -o src/RomanCheck-roman.o `test -f 'src/roman.c' || echo '$(srcdir)/'`src/roman.c
+
+src/RomanCheck-roman.obj: src/roman.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(RomanCheck_CFLAGS) $(CFLAGS) -MT src/RomanCheck-roman.obj -MD -MP -MF src/$(DEPDIR)/RomanCheck-roman.Tpo -c -o src/RomanCheck-roman.obj `if test -f 'src/roman.c'; then $(CYGPATH_W) 'src/roman.c'; else $(CYGPATH_W) '$(srcdir)/src/roman.c'; fi`
+	$(AM_V_at)$(am__mv) src/$(DEPDIR)/RomanCheck-roman.Tpo src/$(DEPDIR)/RomanCheck-roman.Po
+#	$(AM_V_CC)source='src/roman.c' object='src/RomanCheck-roman.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(RomanCheck_CFLAGS) $(CFLAGS) -c -o src/RomanCheck-roman.obj `if test -f 'src/roman.c'; then $(CYGPATH_W) 'src/roman.c'; else $(CYGPATH_W) '$(srcdir)/src/roman.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1027,6 +1052,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/$(am__dirstamp)
 	-rm -f test/$(DEPDIR)/$(am__dirstamp)
 	-rm -f test/$(am__dirstamp)
 
@@ -1039,7 +1066,7 @@ clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf test/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) test/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -1087,7 +1114,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf test/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) test/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
