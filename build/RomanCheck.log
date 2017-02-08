@@ -1,34 +1,30 @@
 Testing starts here!
 
 Running suite(s): Roman
-LXXIV
-50	
-10	
-10	
-1	
-5	
+MCMXCVI
+The int of the given Roman is 1996 
 The starting point of the int_to_roman!
 I'm still ok here 1
-I'm still ok here 2
-position 0 is V
-
-I'm still ok here 3
-roman_substr[0] is V
-what's wrong?
-pos 6 
-what's wrong?
-pos 5 
-what's wrong?
-pos 4 
-what's wrong?
-pos 3 L
-what's wrong?
-pos 2 XX
-what's wrong?
-pos 1 I
-what's wrong?
-pos 0 V
-
-I'm still ok here 4
+substr #0 is M
+substr #1 is CM
+substr #2 is XC
+substr #3 is VI
+the Roman string should be: MCMXCVI
+The int of the given Roman is 60 
+first = 60The int of the given Roman is 14 
+second = 14The starting point of the int_to_roman!
+I'm still ok here 1
+substr #0 is 
+substr #1 is 
+substr #2 is LXX
+substr #3 is IV
+the Roman string should be: LXXIV
+The starting point of the int_to_roman!
+I'm still ok here 1
+substr #0 is 
+substr #1 is 
+substr #2 is XL
+substr #3 is VI
+the Roman string should be: XLVI
 100%: Checks: 1, Failures: 0, Errors: 0
 PASS RomanCheck (exit status: 0)
