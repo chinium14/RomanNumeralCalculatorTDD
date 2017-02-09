@@ -1,30 +1,6 @@
 Testing starts here!
 
 Running suite(s): Roman
-MCMXCVI
-The int of the given Roman is 1996 
-The starting point of the int_to_roman!
-I'm still ok here 1
-substr #0 is M
-substr #1 is CM
-substr #2 is XC
-substr #3 is VI
-the Roman string should be: MCMXCVI
-The int of the given Roman is 60 
-first = 60The int of the given Roman is 14 
-second = 14The starting point of the int_to_roman!
-I'm still ok here 1
-substr #0 is 
-substr #1 is 
-substr #2 is LXX
-substr #3 is IV
-the Roman string should be: LXXIV
-The starting point of the int_to_roman!
-I'm still ok here 1
-substr #0 is 
-substr #1 is 
-substr #2 is XL
-substr #3 is VI
-the Roman string should be: XLVI
 100%: Checks: 1, Failures: 0, Errors: 0
+roman number of the addition is .
 PASS RomanCheck (exit status: 0)
