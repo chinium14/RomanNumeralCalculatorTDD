@@ -2,5 +2,6 @@ Testing starts here!
 
 Running suite(s): Roman
 100%: Checks: 1, Failures: 0, Errors: 0
-roman number of the addition is .
+LX + XIV = LXXIV.
+LX - XIV = XLVI.
 PASS RomanCheck (exit status: 0)
