@@ -20,8 +20,8 @@ START_TEST(firstTest)
    ck_assert_msg(roman_check(r1), "Error: #2! Invalid Roman string! (Check if there is any over-replication of a char! e.g. 'IIII'.)");
  // Test#3 checking the input roman numeral is valid and calculate the integer from the Roman string.
    roman_free(r1);
-   ck_assert_msg(r1 = roman_to_int(r_input), "Error: #3.1! Invalid Roman string! Check if the Roman string has an invalid char!");
-   ck_assert_msg(r1->num == 1996, "Error: #3.2! Did not get the right answer for 'Roman to Int'!");
+   r1 = roman_to_int(r_input);
+   ck_assert_msg(r1->num == 1996, "Error: #3! Did not get the right answer for 'Roman to Int'!");
  // Test#4 translate a int to a Roman string
    char *roman_str_cal = (int_to_roman(r1->num))->r;
    ck_assert_msg(strcmp(roman_str_cal,r1->r) == 0, "Error: #4! Did not get the right answer for 'Int to Roman'!");
